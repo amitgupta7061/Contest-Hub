@@ -194,17 +194,25 @@ export default function Home() {
       
       {/* Footer */}
       <footer className="mt-20 border-t bg-muted/50">
-        <div className="container mx-auto px-4 py-8">
-          <div className="text-center text-sm text-muted-foreground">
-            <p className="mb-2">
-              Built with ❤️ for the competitive programming community
-            </p>
-            <p>
-              Data sourced from official contest platforms • Updates every 5 minutes
-            </p>
-          </div>
-        </div>
-      </footer>
+  <div className="container mx-auto px-4 py-8">
+    <div className="text-center text-sm text-muted-foreground space-y-2">
+      <p>Built with ❤️ for the competitive programming community</p>
+      <p>Data sourced from official contest platforms • Updates every 5 minutes</p>
+
+      <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-2 text-muted-foreground">
+        <span>Crafted by <strong className="text-foreground">Amit Gupta</strong></span>
+        <a
+          href="https://amitt.vercel.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block rounded-md border border-muted-foreground px-3 py-1 text-sm transition hover:bg-muted hover:text-foreground"
+        >
+          View Portfolio
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
     </div>
   );
 }
