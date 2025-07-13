@@ -22,7 +22,7 @@ export function Header() {
           <Button 
             variant="ghost" 
             size="sm"
-            onClick={() => window.open('https://github.com', '_blank')}
+            onClick={() => window.open('https://github.com/amitgupta7061', '_blank')}
             className="hidden sm:flex"
           >
             <Github className="h-4 w-4 mr-2" />

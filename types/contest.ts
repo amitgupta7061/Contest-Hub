@@ -1,14 +1,15 @@
-export interface Contest {
+export type Contest = {
   id: string;
   name: string;
-  platform: 'leetcode' | 'codeforces' | 'codechef' | 'hackerrank' | 'hackerearth' | 'atcoder';
+  platform: 'codeforces' | 'leetcode' | 'codechef' | 'hackerrank' | 'hackerearth' | 'atcoder';
   startTime: string;
   endTime: string;
-  duration: number; // in minutes
+  duration: number;
   url: string;
-  phase: 'BEFORE' | 'CODING' | 'FINISHED';
-  type?: string;
-}
+  phase: 'BEFORE' | 'ONGOING' | 'FINISHED';
+  type: string;
+};
+
 
 export interface Platform {
   id: string;

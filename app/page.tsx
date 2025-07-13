@@ -11,7 +11,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { RefreshCw, TrendingUp, Calendar, Clock } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
-import AllContests from '@/components/contestdata';
 
 export default function Home() {
   const [contests, setContests] = useState<Contest[]>([]);
@@ -84,7 +83,6 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <AllContests />
       
       <main className="container mx-auto px-4 py-8">
         {/* Hero Section */}

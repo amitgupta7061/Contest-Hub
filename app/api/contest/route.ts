@@ -1,32 +1,20 @@
-import { NextResponse } from 'next/server';
+// app/api/contests/route.tsx
 
-const sources = [
-  '/api/codeforces',
-  '/api/codechef',
-  '/api/leetcode',
-  '/api/atcoder',
-  '/api/hackerrank',
-  '/api/hackerearth'
-];
+import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const res = await fetch('https://competeapi.vercel.app/contests/upcoming/', {
+      cache: 'no-store' // avoid caching stale data
+    });
 
-    const contestFetches = sources.map(source =>
-      fetch(`${baseUrl}${source}`).then(res => res.json())
-    );
+    if (!res.ok) {
+      return NextResponse.json({ error: 'Failed to fetch contests' }, { status: 500 });
+    }
 
-    const results = await Promise.all(contestFetches);
-
-    // Flatten and merge all contests
-    const allContests = results
-      .flatMap(data => data?.upcomingContests || [])
-      .sort((a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime());
-
-    return NextResponse.json({ contests: allContests });
+    const data = await res.json();
+    return NextResponse.json(data, { status: 200 });
   } catch (error) {
-    console.error('Error fetching contests:', error);
-    return NextResponse.json({ error: 'Failed to fetch contests' }, { status: 500 });
+    return NextResponse.json({ error: 'Server error' }, { status: 500 });
   }
 }
