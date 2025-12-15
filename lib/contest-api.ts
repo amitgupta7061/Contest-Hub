@@ -9,17 +9,19 @@ export async function fetchContests(): Promise<Contest[]> {
 
     // Convert to your internal Contest[] format
     const contests: Contest[] = data.map((contest: any) => {
-      // Duration from API is in seconds, convert to minutes
-      const durationInSeconds = contest.duration || 0;
-      const durationInMinutes = Math.floor(durationInSeconds / 60);
+      const startTime = new Date(contest.startTime);
+      const endTime = new Date(contest.endTime);
+      
+      // Calculate duration from start and end time (in minutes)
+      const durationInMinutes = Math.floor((endTime.getTime() - startTime.getTime()) / (1000 * 60));
       
       return {
         id: contest.title + contest.site, // Unique string ID
         name: contest.title,
         platform: contest.site.toLowerCase() as Contest['platform'],
-        startTime: new Date(contest.startTime).toISOString(),
-        endTime: new Date(contest.endTime).toISOString(),
-        duration: durationInMinutes,
+        startTime: startTime.toISOString(),
+        endTime: endTime.toISOString(),
+        duration: durationInMinutes > 0 ? durationInMinutes : 120, // Default 2 hours if invalid
         url: contest.url,
         phase: 'BEFORE',
         type: 'General'
