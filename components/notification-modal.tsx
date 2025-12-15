@@ -105,9 +105,22 @@ export function NotificationModal({ open, onOpenChange, contest }: NotificationM
     });
   };
 
-  const formatDuration = (minutes: number) => {
+  const formatDuration = (durationValue: number) => {
+    // If duration is very large (> 10000), it's likely in seconds, convert to minutes
+    let minutes = durationValue;
+    if (durationValue > 10000) {
+      minutes = Math.floor(durationValue / 60);
+    }
+    
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
+    
+    if (hours > 24) {
+      const days = Math.floor(hours / 24);
+      const remainingHours = hours % 24;
+      return `${days}d ${remainingHours}h`;
+    }
+    
     return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
   };
 

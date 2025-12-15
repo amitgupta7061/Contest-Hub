@@ -33,6 +33,8 @@ model ContestNotification {
   notifyViaWhatsapp Boolean @default(false)
   email           String?
   whatsappNumber  String?
+  emailSent       Boolean  @default(false)
+  whatsappSent    Boolean  @default(false)
   userId          String
   user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt       DateTime @default(now())
